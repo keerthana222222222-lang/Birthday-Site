@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Happy Birthday!</title>
+
   <style>
     body {
       margin: 0;
@@ -15,6 +16,8 @@
 
     .container {
       padding-top: 80px;
+      position: relative;
+      z-index: 2;
     }
 
     h1 {
@@ -58,27 +61,32 @@
     .balloon {
       width: 50px;
       height: 70px;
-      background: red;
       border-radius: 50%;
       position: absolute;
       bottom: -100px;
-      animation: float 6s infinite;
+      animation: float linear infinite;
+      z-index: 1;
+      opacity: 0.9;
     }
 
     @keyframes float {
-      0% {transform: translateY(0);}
-      100% {transform: translateY(-100vh);}
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-110vh);
+      }
     }
   </style>
 </head>
+
 <body>
 
 <div class="container">
-  <h1>🎉 Happy Birthday Vijay!!🤝🎂</h1>
+  <h1>🎉 Happy Birthday Vijay!! 🤝🎂</h1>
 
   <p>
     Wishing you a day filled with happiness and a year filled with joy.
-  
   </p>
 
   <button onclick="showSurprise()">Click for Surprise 🎁</button>
@@ -87,21 +95,31 @@
 </div>
 
 <script>
-function showSurprise() {
-  document.getElementById("surprise").innerHTML =
-    "Another year older, but definitely not wiser 😜😂<br>Stay awesome 😎, keep smiling 😊, and enjoy your special day to the fullest ✨";
-}
+document.addEventListener("DOMContentLoaded", function () {
 
-// Create balloons
-for (let i = 0; i < 10; i++) {
-  let balloon = document.createElement("div");
-  balloon.className = "balloon";
-  balloon.style.left = Math.random() * 100 + "vw";
-  balloon.style.backgroundColor =
-    ["red","blue","yellow","green","purple"][Math.floor(Math.random()*5)];
-  balloon.style.animationDuration = (4 + Math.random()*3) + "s";
-  document.body.appendChild(balloon);
-}
+  // Fix: Make function global
+  window.showSurprise = function () {
+    document.getElementById("surprise").innerHTML =
+      "Another year older, but definitely not wiser 😜😂<br><br>Stay awesome 😎, keep smiling 😊, and enjoy your special day to the fullest ✨";
+  };
+
+  // Create balloons
+  for (let i = 0; i < 15; i++) {
+    let balloon = document.createElement("div");
+    balloon.className = "balloon";
+
+    balloon.style.left = Math.random() * 100 + "vw";
+    balloon.style.backgroundColor =
+      ["red", "blue", "yellow", "green", "purple", "orange"][Math.floor(Math.random() * 6)];
+
+    balloon.style.animationDuration = (4 + Math.random() * 4) + "s";
+    balloon.style.width = (40 + Math.random() * 20) + "px";
+    balloon.style.height = (60 + Math.random() * 20) + "px";
+
+    document.body.appendChild(balloon);
+  }
+
+});
 </script>
 
 </body>
